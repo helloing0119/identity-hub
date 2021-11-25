@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 export enum StatusInfo {
     PENDING = "pending",
@@ -12,10 +12,10 @@ export class permission_requests {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @Column({ type : "timestamptz"})
+    @Column({ type: "timestamptz" })
     createdAt: string;
 
-    @Column({ type : "uuid"})
+    @Column({ type: "uuid" })
     object: string;
 
     @Column()
@@ -26,7 +26,7 @@ export class permission_requests {
 
     @Column()
     grantee: string;
-    
+
     @Column({
         type: "enum",
         enum: StatusInfo,
