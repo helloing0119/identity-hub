@@ -1,62 +1,34 @@
 import { Injectable } from '@nestjs/common';
 
-import { Connection, getManager } from "typeorm";
-import { objects } from './entity/objects.entity';
-import { profiles } from './entity/profiles.entity';
+import { DBService } from './db.service';
 import { collections } from './entity/collections.entity';
-import { permission_requests } from './entity/permission_requests.entity';
-import { permissions } from './entity/permissions.entity';
+import { permission_requests, StatusInfo } from './entity/permission_requests.entity';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
-  }
+	constructor(private readonly dbService: DBService) { }
 
-  async getPermissionStatus(objectId: string, grantee: string): Promise<string> {
-    const requestedPermission =
-      await getManager()
-        .createQueryBuilder()
-				.select('pr.status')
-        .from(permission_requests, 'pr')
-				.where('pr.objectId = :objectId', {objectId: objectId})
-        .andWhere('pr.grantee = :grantee', { grantee: grantee })
-        .getOneOrFail();
-		/*
-		select pr.status
-		from permission_requests as pr
-		where pr.grantee = grantee
-		*/
-    return requestedPermission.status;
+	async getHasPermission(objectId: string, profile: string): Promise<boolean> {
+    return this.dbService.getHasPermission(objectId, profile);
   }
 
 	async getFileList(): Promise<collections[]> {
-		const requested =
-			await getManager()
-				.createQueryBuilder()
-				.select('col')
-				.from(collections, 'col')
-				.getMany();
-		/*
-		select col
-		from collections as col
-		*/
-		return requested;
+		return this.dbService.getFileList();
 	}
 
 	async getSearchedFileList(query: string): Promise<collections[]> {
-		const requested =
-			await getManager()
-				.createQueryBuilder()
-				.select('col')
-				.from(collections, 'col')
-				.where('col.metadata LIKE :query', {query : '%' + query + '%'})
-				.getMany();
-		/*
-		select col
-		from collections as col
-		where col.metadata LIKE '%{query}%' (== text that has {query})
-		*/
-		return requested;
+		return this.dbService.getSearchedFileList(query);
+	}
+
+	async getPermissionRequests(profile : string): Promise<permission_requests[]> {
+		return this.dbService.getPermissionRequests(profile);
+	}
+
+	postPermissionRequest(objectId: string, grantee: string): void {
+		this.dbService.postPermissionRequest(objectId, grantee);
+	}
+
+	patchPermissionRequest(objectId: string, profile : string, decision: string): void {
+		this.dbService.patchPermissionRequest(objectId, profile, decision);
 	}
 }

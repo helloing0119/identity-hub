@@ -32,5 +32,5 @@ export class permissions {
         enum: PermissionType,
         default: PermissionType.PUBLIC
     })
-    status: PermissionType;
+		permissionType: PermissionType;
 }
