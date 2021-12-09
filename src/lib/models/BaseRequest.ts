@@ -59,4 +59,14 @@ export default abstract class BaseRequest {
   getType(): string {
     return this.type;
   }
+  static getTypeFromJson(json: string | any): string {
+    let request = json;
+    if (typeof json === 'string') {
+      request = JSON.parse(json);
+    }
+    if (typeof request['@type'] !== 'string') {
+      throw 'Parameter Error : @type should be string';
+    }
+    return request['@type'];
+  }
 }

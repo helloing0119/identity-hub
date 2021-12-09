@@ -58,5 +58,9 @@ export default class PermissionQueryRequest extends BaseRequest {
     } else {
       this.allFlag = true;
     }
+
+    if (this.allFlag) {
+      throw 'Parameter Error : owner or objectId is required';
+    }
   }
 }
