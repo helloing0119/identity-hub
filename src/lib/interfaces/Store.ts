@@ -12,7 +12,7 @@ export default class Store {
 
   async init(host: string, type: string, port: number, username: string, password: string, database: string) {
     this.connection = await createConnection({
-      type: type,
+      type: "postgres",
       host: host,
       port: port,
       username: username,
@@ -20,6 +20,7 @@ export default class Store {
       database: database
     });
   }
+
 	async getDID(profile: string): Promise<string> {
 		// get hubDID by profile
 		const obj = 
