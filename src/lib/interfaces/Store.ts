@@ -126,7 +126,7 @@ export default class Store {
       .getRawMany();
 
       var result = [];
-      parsed.array.forEach(async (e) => {
+      Promise.all(parsed).then(async (e) => {
         const pr = await getManager()
         .createQueryBuilder()
         .select('pr')
