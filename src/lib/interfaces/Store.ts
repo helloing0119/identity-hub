@@ -125,8 +125,21 @@ export default class Store {
       var parsed = requested
       .getRawMany();
 
+      const iterable = {
+        from: 1,
+        to: parsed.length(),
+        [Symbol.asyncIterator] () {
+          retrun {
+            current: this.from,
+            last: this.to,
+            async next() {
+              
+            }
+          }
+        }
+      }
       var result = [];
-      for await (const e of parsed) {
+      parsed.array.forEach(async (e) => {
         const pr = await getManager()
         .createQueryBuilder()
         .select('pr')
@@ -145,7 +158,7 @@ export default class Store {
         };
 
         result = result.concat(entity);
-      }
+      });
 
       return result;
   }
