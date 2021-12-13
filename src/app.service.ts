@@ -5,7 +5,7 @@ import Hub from './lib/Hub';
 export class AppService {
   constructor (@Inject('Hub') private readonly hub: Hub) {}
 
-  async handleRequest(request: Buffer): Buffer {
+  async handleRequest(request: Buffer): Promise<any> {
     const response = await this.hub.handleRequest(request);
     return response;
   }

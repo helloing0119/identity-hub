@@ -44,7 +44,7 @@ export default class Hub {
       PermissionQuery: new PermissionQueryController(this.context, this._authorization)
     };
   }
-  public async handleRequest(request: Buffer): Promise<Response> {
+  public async handleRequest(request: Buffer): Promise<any> {
     let verifiedRequest;
     try {
       verifiedRequest = await this._authentication.getVerifiedRequest(request, false);

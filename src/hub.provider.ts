@@ -1,5 +1,5 @@
 import { HttpResolver } from '@decentralized-identity/did-common-typescript';
-import { EcPublicKey, EcPrivateKey } from '@decentralized-identity/did-common-typescript';
+import { EcPrivateKey } from '@decentralized-identity/did-auth-jose';
 
 import Hub from './lib/Hub';
 import Store from './lib/interfaces/Store';
@@ -35,7 +35,7 @@ export const hubProvider = [
         "dbname"
       );
 
-      const context = new Context(keys, [Secp256k1CryptoSuite], store, httpResolver);
+      const context = new Context(keys, [new Secp256k1CryptoSuite()], store, httpResolver);
       const hub = new Hub(context);
 
       return hub;
