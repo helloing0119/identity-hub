@@ -5,9 +5,9 @@ import * as crypto from 'crypto';
 import Context from '../interfaces/Context';
 
 export default class Commit {
-  protected protectedMembers: object;
-  protected headerMembers: object;
-  protected payloadMembers: object;
+  protected protectedMembers: any;
+  protected headerMembers: any;
+  protected payloadMembers: any;
   protected signature: string;
 
   private originalProtected: string;

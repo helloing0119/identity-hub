@@ -126,7 +126,7 @@ export default class Store {
 
       var result = [];
 
-      parsed.forEach(async (e) => {
+      await parsed.forEach(async (e) => {
         const pr = await getManager()
         .createQueryBuilder()
         .select('pr')
@@ -177,14 +177,13 @@ export default class Store {
     .createQueryBuilder()
     .select('col')
     .from(collections, 'col')
-    .where()
-    .getMany();
+    .where();
 
     if(query.type) { requested.andWhere('col.type = :type', {type: query.type}); }
     if(query.owner) { requested.andWhere('col.profile = :owner', {owner: query.owner}); }
     if(query.objectId) { requested.andWhere('col.object = :objectId', {objectId: query.objectId}); }
 
-    return requested;
+    return requested.getMany();
 
   }
 
