@@ -125,8 +125,7 @@ export default class Store {
       .getRawMany();
 
       var result = [];
-
-      await parsed.forEach(async (e) => {
+      for await (const e of parsed) {
         const pr = await getManager()
         .createQueryBuilder()
         .select('pr')
@@ -145,7 +144,7 @@ export default class Store {
         };
 
         result = result.concat(entity);
-      });
+      }
 
       return result;
   }
@@ -177,7 +176,7 @@ export default class Store {
     .createQueryBuilder()
     .select('col')
     .from(collections, 'col')
-    .where();
+    .where("");
 
     if(query.type) { requested.andWhere('col.type = :type', {type: query.type}); }
     if(query.owner) { requested.andWhere('col.profile = :owner', {owner: query.owner}); }
