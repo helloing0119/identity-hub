@@ -47,13 +47,13 @@ export default class Hub {
   public async handleRequest(request: Buffer): Promise<Response> {
     let verifiedRequest;
     try {
-      verifiedRequest = await this._authentication.getVerifiedRequest(request, this._requireAccessToken);
+      verifiedRequest = await this._authentication.getVerifiedRequest(request, false);
     } catch (error) {
       // TODO: Proper error logging with logger, for now logging to console.
       console.log(error);
       return {
         ok: false,
-        body: Buffer.from({errorCode: error}),
+        body: Buffer.from(String(error)),
       };
     }
 
@@ -65,7 +65,7 @@ export default class Hub {
     }
     try { 
       let response: BaseResponse;
-      const requestType = BaseRequest.getTypeFromJson(request);
+      const requestType = BaseRequest.getTypeFromJson(verifiedRequest.request);
       switch (requestType) {
         case 'CommitQueryRequest':
           const commitQueryRequest = new CommitQueryRequest(verifiedRequest.request);
@@ -119,7 +119,7 @@ export default class Hub {
       console.log(error);
       return {
         ok:false,
-        body: Buffer.from({errorCode: error}),
+        body: Buffer.from(String(error)),
       }
     }
   }

@@ -178,21 +178,11 @@ export default class Store {
     .select('col')
     .from(collections, 'col');
 
-    if(query.type) {
-      requested = await requested
-      .where('col.type = :type', {type: query.type});
-    }
-    if(query.owner) {
-      requested = await requested
-      .Where('col.profile = :owner', {owner: query.owner});
-    }
-    if(query.objectId) {
-      requested = await requested
-      .Where('col.object = :objectId', {objectId: query.objectId});
-    }
+    if(query.type) { requested.andWhere('col.type = :type', {type: query.type}); }
+    if(query.owner) { requested.andWhere('col.profile = :owner', {owner: query.owner}); }
+    if(query.objectId) { requested.andWhere('col.object = :objectId', {objectId: query.objectId}); }
 
-    requested = await requested
-    .getMany();
+    requested = await requested.getMany();
 
     return requested;
 
