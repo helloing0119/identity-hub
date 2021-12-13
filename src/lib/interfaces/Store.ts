@@ -125,19 +125,6 @@ export default class Store {
       var parsed = requested
       .getRawMany();
 
-      const iterable = {
-        from: 1,
-        to: parsed.length(),
-        [Symbol.asyncIterator] () {
-          retrun {
-            current: this.from,
-            last: this.to,
-            async next() {
-              
-            }
-          }
-        }
-      }
       var result = [];
       parsed.array.forEach(async (e) => {
         const pr = await getManager()
