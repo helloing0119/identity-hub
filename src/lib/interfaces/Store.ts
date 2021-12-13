@@ -126,7 +126,7 @@ export default class Store {
       .getRawMany();
 
       var result = [];
-      Promise.all(parsed.foreach(async (e) => {
+      await parsed.then(async (e) => {
         const pr = await getManager()
         .createQueryBuilder()
         .select('pr')
@@ -145,7 +145,7 @@ export default class Store {
         };
 
         result = result.concat(entity);
-      }));
+      });
 
       return result;
   }
