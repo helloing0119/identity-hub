@@ -67,7 +67,7 @@ export default class Commit {
 
 
     const additionalHeaders = Object.assign({}, jwt.header);
-    additionalHeaders.iss = DidDocument.getDidFromKeyId(this.protectedHeaders.kid!);
+    additionalHeaders.iss = DidDocument.getDidFromKeyId(this.protectedMembers.kid!);
     additionalHeaders.rev = revision;
     if (!("object_id" in protectedHeaders)) {
       additionalHeaders.object_id = revision;
@@ -119,7 +119,7 @@ export default class Commit {
     if (!Commit.cryptoFactory) {
       Commit.cryptoFactory = new CryptoFactory(context.cryptoSuites);
     }
-    const content = `${this.originalProtected}.${this.originalPayload}.${this.originalSignature}`;
+    const content = `${this.originalProtected}.${this.originalPayload}.${this.signature}`;
     const token = new JwsToken(content, Commit.cryptoFactory);
     const keyId = token.getHeader().kid;
     const senderDID = DidDocument.getDidFromKeyId(keyId);

@@ -1,9 +1,10 @@
-import { EcPublicKey, EcPrivateKey } from '@decentralized-identity/did-auth-jose';
+import { EcPrivateKey } from '@decentralized-identity/did-auth-jose';
 import { CryptoSuite } from '@decentralized-identity/did-auth-jose';
 import { PrivateKey, PublicKey } from '@decentralized-identity/did-auth-jose';
 import { IDidDocumentPublicKey } from '@decentralized-identity/did-common-typescript';
 import * as crypto from 'crypto';
 import { SymmetricEncrypter } from './SymetricEncrypter';
+import EcPublicKey from './EcPublicKey';
 
 const secp256k1 = require('secp256k1');
 const keyto = require('@trust/keyto');

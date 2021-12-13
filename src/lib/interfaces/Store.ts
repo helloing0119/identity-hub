@@ -164,7 +164,7 @@ export default class Store {
 		return requested;
 	}
 
-  async getFileListFromMultipleQuery(query: any): Promise<Collections[]> {
+  async getFileListFromMultipleQuery(query: any): Promise<collections[]> {
     /*
     * Query
     * {
@@ -176,13 +176,13 @@ export default class Store {
     let requested = await getManager()
     .createQueryBuilder()
     .select('col')
-    .from(collections, 'col');
+    .from(collections, 'col')
+    .where()
+    .getMany();
 
     if(query.type) { requested.andWhere('col.type = :type', {type: query.type}); }
     if(query.owner) { requested.andWhere('col.profile = :owner', {owner: query.owner}); }
     if(query.objectId) { requested.andWhere('col.object = :objectId', {objectId: query.objectId}); }
-
-    requested = await requested.getMany();
 
     return requested;
 
@@ -291,7 +291,7 @@ export default class Store {
 		})
 		.execute();
 
-    return createConnection.raw;
+    return createdCollection.raw;
   }
 
 
