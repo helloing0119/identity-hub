@@ -32,7 +32,7 @@ export const hubProvider = [
         5432,
         "username",
         "password",
-        "dbname"
+        "blockerDB"
       );
 
       const context = new Context(keys, [new Secp256k1CryptoSuite()], store, httpResolver);

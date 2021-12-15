@@ -10,7 +10,6 @@ import ObjectQueryController from './controllers/ObjectQueryController';
 import PermissionAskController from './controllers/PermissionAskController';
 import PermissionGrantController from './controllers/PermissionGrantController';
 import PermissionQueryController from './controllers/PermissionQueryController';
-import Response from './models/Response';
 import CommitQueryRequest from './models/CommitQueryRequest';
 import CommitRequest from './models/CommitRequest';
 import ObjectQueryRequest from './models/ObjectQueryRequest';

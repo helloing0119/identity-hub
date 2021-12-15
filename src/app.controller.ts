@@ -8,15 +8,15 @@ export class AppController {
 
   @Post('Collections')
   async handleCollectionsRequest(@Req() req: Request, @Res() res: Response) {
-    const result = await this.appService.handleRequest(Buffer.from(req.body));
+    const result = await this.appService.handleRequest(Buffer.from(req.data));
     if (result.ok) { res.status(200).send(result.body.toString()); }
     else { res.status(400).send(result.body.toString()); }
   }
 
   @Post('Permissions')
   async handlePermissionsRequest(@Req() req: Request, @Res() res: Response) {
-    const result = await this.appService.handleRequest(Buffer.from(req.body));
-    if (result.ok) { res.status(200).send(result.body.toString()); }
-    else { res.status(400).send(result.body.toString()); }
+    const result = await this.appService.handleRequest(Buffer.from(req.data));
+    if (result.ok) { res.status(200).send({data: result.body.toString()}); }
+    else { res.status(400).send({data: result.body.toString()}); }
   }
 }
