@@ -39,14 +39,14 @@ export default class CommitContoller extends BaseControllelr {
 
         if (oid) {
           //Case : push new commit to existing object
-          await this.context.store.postCollction(commit);
+          await this.context.store.postCollection(commit);
         }
         else {
           //Case : push new object
           const profile = commit.getHeaderMembers().iss;
           const hub = commit.getProtectedMembers().sub;
           const createdObjectId = await this.context.store.postObject(profile, hub);
-          await this.context.store.postCollction(commit, createdObjectId);
+          await this.context.store.postCollection(commit, createdObjectId);
         }
       });
 

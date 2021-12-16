@@ -109,6 +109,7 @@ export default class Hub {
       const responseBody = response.toString();
       const responseBuffer = await this._authentication.getAuthenticatedResponse(verifiedRequest, responseBody);
 
+      console.log(responseBody);
       return {
         ok: true,
         body: responseBuffer

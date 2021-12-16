@@ -9,7 +9,7 @@ import { IDidDocumentPublicKey } from '@decentralized-identity/did-common-typesc
 
  enum RecommendedKeyType {
   None = '',
-  Ec = 'EC',
+  Ec = 'secp256k1',
   Rsa = 'RSA',
   Oct = 'oct'
 }
@@ -31,7 +31,7 @@ export default class EcPublicKey extends PublicKey {
    */
   constructor (keyData: IDidDocumentPublicKey) {
     super();
-    this.kid = keyData.id;
+    this.kid = keyData.kid;
 
     const data = keyData as any;
 

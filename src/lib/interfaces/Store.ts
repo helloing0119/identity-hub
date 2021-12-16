@@ -268,7 +268,7 @@ export default class Store {
     return createdProfile.raw[0];
   }
 
-  async postCollction(commit: Commit, objectId?: number) {
+  async postCollection(commit: Commit, objectId?: number) {
     const protectedMembers = commit.getProtectedMembers();
     const payloadMembers = commit.getPayloadMembers();
     const headerMembers = commit.getHeaderMembers();
@@ -294,8 +294,7 @@ export default class Store {
 
     return createdCollection.raw;
   }
-
-
+  
   async postPermissionRequest(objectId: string, grantee: string) {
     // get file data from [objects]
     const filedata =

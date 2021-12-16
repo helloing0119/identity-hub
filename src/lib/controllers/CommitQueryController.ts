@@ -37,7 +37,7 @@ export default class CommitQueryController extends BaseControllelr {
       const commits = storeResult.map(col => {
         return JSON.stringify({
           "protected": {
-            "alg": "RS256",
+            "alg": "secp256k1",
             "kid": "",
             "@context": "http://schema.org",
             "interface": "Collections",
